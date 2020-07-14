@@ -1,0 +1,22 @@
+language: generic
+sudo: required
+services: 
+  - docker
+
+before_install:
+  - docker build -t metafield/react-test -f ./client/Dockerfile.dev ./client
+
+script:
+  - docker run -e CI=true metafield/react-test npm test
+
+after_success:
+  - docker build -t metafield/multi-client ./client
+  - docker build -t metafield/multi-nginx ./nginx
+  - docker build -t metafield/multi-server ./server
+  - docker build -t metafield/multi-worker ./worker
+  # Log in to Docker CLI
+  - echo "$DOCKER_PASSWORD" | docker login -u "$DOCKER_ID" --password-stdin
+  - docker push metafield/multi-client
+  - docker push metafield/multi-nginx
+  - docker push metafield/multi-server
+  - docker push metafield/multi-worker
