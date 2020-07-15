@@ -1,17 +1,17 @@
 {
-  "AWSEBDockerrunVersion": 2,
+  "AWSEBDockerrunVersion": "2",
   "containerDefinitions": [
     {
       "name": "client",
       "image": "metafield/multi-client",
       "hostname": "client",
-      "essential": false
+      "essential": "false"
     },
     {
       "name": "server",
       "image": "metafield/multi-server",
       "hostname": "api",
-      "essential": false,
+      "essential": "false",
       "environment": [
         {
           "name": "REDIS_HOST",
@@ -47,7 +47,7 @@
       "name": "worker",
       "image": "metafield/multi-worker",
       "hostname": "worker",
-      "essential": false,
+      "essential": "false",
       "environment": [
         {
           "name": "REDIS_HOST",
@@ -63,11 +63,11 @@
       "name": "nginx",
       "image": "metafield/multi-nginx",
       "hostname": "nginx",
-      "essential": true,
+      "essential": "true",
       "portMappings": [
         {
-          "hostPort": 80,
-          "containerPort": 80
+          "hostPort": "80",
+          "containerPort": "80"
         }
       ],
       "links": [
