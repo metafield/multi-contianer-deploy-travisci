@@ -1,0 +1,79 @@
+{
+  "AWSEBDockerrunVersion": 2,
+  "containerDefinitions": [
+    {
+      "name": "client",
+      "image": "metafield/multi-client",
+      "hostname": "client",
+      "essential": false
+    },
+    {
+      "name": "server",
+      "image": "metafield/multi-server",
+      "hostname": "api",
+      "essential": false,
+      "environment": [
+        {
+          "name": "REDIS_HOST",
+          "value": "multi-docker-redis.jvznoa.0001.usw2.cache.amazonaws.com"
+        },
+        {
+          "name": "REDIS_PORT",
+          "value": "6379"
+        },
+        {
+          "name": "PGUSER",
+          "value": "postgres"
+        },
+        {
+          "name": "PGHOST",
+          "value": "multi-docker-postgres.cdfibzmgngit.us-west-2.rds.amazonaws.com"
+        },
+        {
+          "name": "PGDATABASE",
+          "value": "fibvalues"
+        },
+        {
+          "name": "PGPASSWORD",
+          "value": "postgres_password"
+        },
+        {
+          "name": "PGPORT",
+          "value": "5432"
+        }
+      ]
+    },
+    {
+      "name": "worker",
+      "image": "metafield/multi-worker",
+      "hostname": "worker",
+      "essential": false,
+      "environment": [
+        {
+          "name": "REDIS_HOST",
+          "value": "multi-docker-redis.jvznoa.0001.usw2.cache.amazonaws.com"
+        },
+        {
+          "name": "REDIS_PORT",
+          "value": "6379"
+        }
+      ]
+    },
+    {
+      "name": "nginx",
+      "image": "metafield/multi-nginx",
+      "hostname": "nginx",
+      "essential": true,
+      "portMappings": [
+        {
+          "hostPort": 80,
+          "containerPort": 80
+        }
+      ],
+      "links": [
+        "client",
+        "server"
+      ]
+    }
+  ]
+}
