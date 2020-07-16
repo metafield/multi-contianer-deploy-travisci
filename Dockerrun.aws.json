@@ -29,7 +29,7 @@
         },
         {
           "name": "PGHOST",
-          "value": "multi-docker-postgres.cdfibzmgngit.us-west-2.rds.amazonaws.com"
+          "value": "multi-docker-rds.cdfibzmgngit.us-west-2.rds.amazonaws.com"
         },
         {
           "name": "PGDATABASE",
