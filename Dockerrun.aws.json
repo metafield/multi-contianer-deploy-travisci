@@ -5,13 +5,15 @@
       "name": "client",
       "image": "metafield/multi-client",
       "hostname": "client",
-      "essential": false
+      "essential": false,
+      "memory": 128
     },
     {
       "name": "server",
       "image": "metafield/multi-server",
       "hostname": "api",
       "essential": false,
+      "memory": 128,
       "environment": [
         {
           "name": "REDIS_HOST",
@@ -48,6 +50,7 @@
       "image": "metafield/multi-worker",
       "hostname": "worker",
       "essential": false,
+      "memory": 128,
       "environment": [
         {
           "name": "REDIS_HOST",
@@ -64,6 +67,7 @@
       "image": "metafield/multi-nginx",
       "hostname": "nginx",
       "essential": true,
+      "memory": 128,
       "portMappings": [
         {
           "hostPort": 80,
